@@ -1,0 +1,25 @@
+name: Deploy to Linux Server
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y sshpass
+
+      - name: Deploy code
+        env:
+          SSH_PASS: ${{ secrets.SSH_PASS }}
+        run: |
+          sshpass -e ssh carlos@137.184.205.231 "cd /var/www/html && git pull origin master"
