@@ -1,0 +1,54 @@
+<?php
+
+if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+    http_response_code(405);
+    die("This page only accepts POST requests.");
+}
+
+$email_regex = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
+$errors = [];
+
+if( $_POST["name"] && $_POST["email"] && $_POST["message"]) {
+  if (preg_match("/[^A-Za-z]/",$_POST['name'] )) {
+    $errors[] = "Invalid name";
+  }
+  if (!preg_match($email_regex,$_POST['email'] )) {
+    $errors[] = "Invalid email address";
+  }
+  if (mb_strlen($_POST['message']) > 250) {
+    $errors[] = "Input must be under 250 characters.";
+  }
+
+   if (empty($errors)) {
+        // Send email or process the form data here
+        echo json_encode(['success' => true, 'message' => 'Form submitted successfully.']);
+	header("Location: https://www.carlosmeister.com.com");
+        exit();
+   }
+} else {
+  $errors[] = "Please provide all required data";
+}
+
+?>
+
+<html>
+   <body>
+      <?php
+        if (!empty($errors)) {
+          echo "<ul>";
+          foreach ($errors as $error) {
+            echo "<li>" . $error . "</li>";
+          }
+          echo "</ul>";
+        }
+      ?>
+   
+      <form action = "<?php $_PHP_SELF ?>" method = "POST">
+         Name: <input type = "text" name = "name" />
+         Email: <input type = "text" name = "email" />
+         Message: <input type = "text" name = "message" />
+         <input type = "submit" />
+      </form>
+   
+   </body>
+</html>
