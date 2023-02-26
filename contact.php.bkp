@@ -17,7 +17,7 @@ $email_regex="/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
       if (mb_strlen($_POST['message']) > 250) {
 	die("Input must be under 250 characters.");
       }
-//      echo "Thank you ". $_POST['name']. "<br />";
+//     hello echo "Thank you ". $_POST['name']. "<br />";
 //      echo "Your data has been submitted";
       header("Location: https://www.carlosmeister.com/");
       exit();
