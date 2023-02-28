@@ -20,6 +20,6 @@ jobs:
 
       - name: Deploy code
         env:
-          SSH_PASS: ${{ secrets.SSH_PASS }}
+          SSHPASS: ${{ secrets.SSH_PASS }}
         run: |
           sshpass -e ssh carlos@137.184.205.231 "cd /var/www/html && git pull origin"
