@@ -22,4 +22,4 @@ jobs:
         env:
           SSHPASS: ${{ secrets.SSH_PASS }}
         run: |
-          sshpass -e ssh carlos@137.184.205.231 "cd /var/www/html && git pull origin"
+          sshpass -e ssh -o StrictHostKeyChecking=no carlos@137.184.205.231 "cd /var/www/html && git pull origin"
