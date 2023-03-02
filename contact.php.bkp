@@ -18,7 +18,7 @@ $email_regex="/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
 	die("Input must be under 250 characters.");
       }
 //      echo "Thank you ". $_POST['name']. "<br />";
-//      hello world echo "Your data has been submitted";
+//      echo "Your data has been submitted";
       header("Location: https://www.carlosmeister.com/");
       exit();
    } else {
